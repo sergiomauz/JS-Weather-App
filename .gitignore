@@ -1,0 +1,5 @@
+# .gitignore
+# visit: https://github.com/microverseinc/linters-config/tree/master/javascript
+# run npm install
+node_modules/
+package-lock.json

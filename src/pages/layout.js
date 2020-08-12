@@ -7,7 +7,7 @@ import Main from '../components/main';
 import Home from './home';
 
 const layout = (() => {
-  const contentName = 'content';
+  const contentID = 'content';
   let layoutElement;
   let navbarElement;
   let sidebarElement;
@@ -16,6 +16,7 @@ const layout = (() => {
   const loadPage = (page) => {
     if (layoutElement !== undefined) {
       const main = layoutElement.querySelector(`div[id='${Main.getID()}']`);
+      main.innerHTML = '';
       main.appendChild(page);
     }
   };
@@ -25,7 +26,7 @@ const layout = (() => {
     sidebarElement = Sidebar.create();
     mainElement = Main.create();
 
-    layoutElement = NewElement('div', null, null, null, ['id', contentName]);
+    layoutElement = NewElement('div', null, null, null, ['id', contentID]);
     layoutElement.appendChild(navbarElement);
     layoutElement.appendChild(
       NestedElements(

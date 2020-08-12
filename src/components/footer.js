@@ -1,12 +1,22 @@
-import newElement from '../rendering/newelement';
-import nestElements from '../rendering/nestelements';
+import NewElement from '../rendering/newelement';
+import NestedElements from '../rendering/nestedelements';
 
-const Footer = () => {
-  const footer = nestElements(
-    newElement('footer', 'footer bg-white'),
-    newElement('div', 'container'),
-  );
-  return footer;
-};
+const footer = (() => {
+  const footerID = 'footer-container';
+  let footerElement;
 
-export default Footer;
+  const create = () => {
+    footerElement = NestedElements(
+      NewElement('footer', 'footer bg-white'),
+      NewElement('div', 'container'),
+    );
+  };
+
+  const get = () => footerElement;
+
+  const getID = () => footerID;
+
+  return { create, get, getID };
+})();
+
+export default footer;

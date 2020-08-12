@@ -8,13 +8,15 @@ const sidebar = (() => {
 
   const create = () => {
     sidebarElement = NestedElements(
-      NewElement('nav', 'col-md-3 col-lg-2 d-md-block bg-light sidebar collapse', null, null, ['id', sidebarID]),
-      NewElement('div', 'sidebar-sticky pt-3'),
+      NewElement({ tag: 'nav', classes: 'col-md-3 col-lg-2 d-md-block bg-light sidebar collapse', attributes: { id: sidebarID } }),
+      NewElement({ tag: 'div', classes: 'sidebar-sticky pt-3' }),
       ElementsList(
-        NewElement('ul', 'nav flex-column'),
+        NewElement({ tag: 'ul', classes: 'nav flex-column' }),
         NestedElements(
-          NewElement('li', 'text-center mb-3'),
-          NewElement('btn', 'btn btn-sm btn-info', 'NEW QUERY +', null, ['href', '#']),
+          NewElement({ tag: 'li', classes: 'text-center mb-3' }),
+          NewElement({
+            tag: 'btn', classes: 'btn btn-sm btn-info', html: 'NEW QUERY +', attributes: { href: '#' },
+          }),
         ),
       ),
     );

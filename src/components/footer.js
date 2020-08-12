@@ -7,8 +7,8 @@ const footer = (() => {
 
   const create = () => {
     footerElement = NestedElements(
-      NewElement('footer', 'footer bg-white'),
-      NewElement('div', 'container'),
+      NewElement({ tag: 'footer', classes: 'footer bg-white' }),
+      NewElement({ tag: 'div', classes: 'container' }),
     );
   };
 

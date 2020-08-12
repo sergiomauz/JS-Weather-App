@@ -3,11 +3,13 @@ import ElementsList from '../rendering/elementslist';
 
 const Home = (() => {
   const home = ElementsList(
-    NewElement('div'),
+    NewElement({ tag: 'div' }),
     NewElement(
-      'p',
-      'home-text mt-5',
-      'Welcome to "<span class="inline-logo">ToDo List Application</span>"',
+      {
+        tag: 'p',
+        classes: 'home-text mt-5',
+        html: 'Welcome to "<span class="inline-logo">ToDo List Application</span>"',
+      },
     ),
   );
   return home;

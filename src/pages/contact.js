@@ -3,22 +3,30 @@ import ElementsList from '../rendering/elementslist';
 
 const Contact = (() => {
   const contact = ElementsList(
-    NewElement('div', 'page contact d-flex flex-column'),
-    NewElement('h1', 'contact-title', 'Contact'),
-    NewElement('p', 'contact-text', 'Comments? Questions? Drop us a line!'),
+    NewElement({ tag: 'div', classes: 'page contact d-flex flex-column' }),
+    NewElement({ tag: 'h1', classes: 'contact-title', html: 'Contact' }),
+    NewElement({ tag: 'p', classes: 'contact-text', html: 'Comments? Questions? Drop us a line!' }),
     ElementsList(
-      NewElement('form'),
+      NewElement({ tag: 'form' }),
       ElementsList(
-        NewElement('div', 'form-group'),
-        NewElement('label', null, 'E-mail:', null, ['for', 'email']),
-        NewElement('input', 'form-control', null, null, ['id', 'email'], ['placeholder', 'Enter your e-mail here']),
+        NewElement({ tag: 'div', classes: 'form-group' }),
+        NewElement({ tag: 'label', html: 'E-mail:', attributes: { for: 'email' } }),
+        NewElement({
+          tag: 'input',
+          classes: 'form-control',
+          attributes: { id: 'email', placeholder: 'Enter your e-mail here' },
+        }),
       ),
       ElementsList(
-        NewElement('div', 'form-group'),
-        NewElement('label', null, 'Message:', null, ['for', 'message']),
-        NewElement('textarea', 'form-control', null, null, ['id', 'message'], ['placeholder', 'Your message here'], ['rows', '5']),
+        NewElement({ tag: 'div', classes: 'form-group' }),
+        NewElement({ tag: 'label', html: 'Message:', attributes: { for: 'message' } }),
+        NewElement({
+          tag: 'textarea',
+          classes: 'form-control',
+          attributes: { id: 'message', placeholder: 'Your message here', rows: '5' },
+        }),
       ),
-      NewElement('button', 'btn btn-warning', 'Send'),
+      NewElement({ tag: 'button', classes: 'btn btn-warning', html: 'Send' }),
     ),
   );
   return contact;

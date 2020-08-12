@@ -5,7 +5,7 @@ const main = (() => {
   let mainElement;
 
   const create = () => {
-    mainElement = NewElement('div', 'col-md-9 ml-sm-auto col-lg-10 px-md-4', null, null, ['id', mainID]);
+    mainElement = NewElement({ tag: 'div', classes: 'col-md-9 ml-sm-auto col-lg-10 px-md-4', attributes: { id: mainID } });
 
     return mainElement;
   };

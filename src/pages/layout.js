@@ -26,13 +26,13 @@ const layout = (() => {
     sidebarElement = Sidebar.create();
     mainElement = Main.create();
 
-    layoutElement = NewElement('div', null, null, null, ['id', contentID]);
+    layoutElement = NewElement({ tag: 'div', attributes: { id: contentID } });
     layoutElement.appendChild(navbarElement);
     layoutElement.appendChild(
       NestedElements(
-        NewElement('main', 'container-fluid'),
+        NewElement({ tag: 'main', classes: 'container-fluid' }),
         ElementsList(
-          NewElement('div', 'row'),
+          NewElement({ tag: 'div', classes: 'row' }),
           sidebarElement,
           mainElement,
         ),

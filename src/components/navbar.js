@@ -7,10 +7,10 @@ const navbar = (() => {
 
   const create = () => {
     navbarElement = ElementsList(
-      NewElement('nav', 'navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow', null, null, ['id', navbarID]),
+      NewElement({ tag: 'nav', classes: 'navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow', attributes: { id: navbarID } }),
       ElementsList(
-        NewElement('a', 'navbar-brand col-md-3 col-lg-2 mr-0 px-3 text-center', null, null, ['href', '#']),
-        NewElement('span', 'logo', 'Marvelous Weather'),
+        NewElement({ tag: 'a', classes: 'navbar-brand col-md-3 col-lg-2 mr-0 px-3 text-center', attributes: { href: '#' } }),
+        NewElement({ tag: 'span', classes: 'logo', html: 'Marvelous Weather' }),
       ),
     );
 

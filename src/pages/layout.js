@@ -31,11 +31,10 @@ const layout = (() => {
     layoutElement.appendChild(
       NestedElements(
         NewElement({ tag: 'main', classes: 'container-fluid' }),
-        ElementsList(
-          NewElement({ tag: 'div', classes: 'row' }),
-          sidebarElement,
-          mainElement,
-        ),
+        ElementsList({
+          container: NewElement({ tag: 'div', classes: 'row' }),
+          childs: [sidebarElement, mainElement],
+        }),
       ),
     );
 

@@ -1,9 +1,11 @@
-const elementsList = (container, ...elements) => {
-  elements.forEach(
-    (element) => {
-      container.appendChild(element);
-    },
-  );
+const elementsList = (params) => {
+  const {
+    container, childs,
+  } = params;
+
+  childs.forEach((element) => {
+    container.appendChild(element);
+  });
   return container;
 };
 

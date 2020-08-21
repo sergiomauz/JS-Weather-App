@@ -11,8 +11,8 @@ const newMap = (params) => {
       attributes: {
         class: 'iframe',
         src: `https://maps.google.com/?ll=${latitude},${longitude}&z=13&output=embed`,
-        height: '600',
-        width: '600',
+        height: '500',
+        width: '100%',
         frameborder: '0',
         style: 'border: 0',
       },

@@ -12,12 +12,14 @@ const sidebar = (() => {
       NewElement({ tag: 'div', classes: 'sidebar-sticky pt-3' }),
       ElementsList({
         container: NewElement({ tag: 'ul', classes: 'nav flex-column' }),
-        childs: [NestedElements(
-          NewElement({ tag: 'li', classes: 'text-center mb-3' }),
-          NewElement({
-            tag: 'btn', classes: 'btn btn-sm btn-info', html: 'NEW QUERY +', attributes: { href: '#' },
-          }),
-        )],
+        childs: [
+          NestedElements(
+            NewElement({ tag: 'li', classes: 'text-center mb-3' }),
+            NewElement({
+              tag: 'btn', classes: 'btn btn-sm btn-info', html: 'NEW QUERY +', attributes: { href: '#' },
+            }),
+          ),
+        ],
       }),
     );
 

@@ -26,10 +26,10 @@ class Weather {
     return this.units;
   }
 
-  async requestAPI() {
-    await fetch(this.urlAPI)
+  requestAPI() {
+    fetch(this.urlAPI)
       .then((response) => response.json())
-      .then((myJson) => console.log(myJson));
+      .then((myJson) => myJson);
   }
 }
 

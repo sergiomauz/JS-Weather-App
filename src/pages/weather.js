@@ -1,40 +1,33 @@
 import NewElement from '../rendering/newelement';
 import ElementsList from '../rendering/elementslist';
+import FormWeather from '../components/form';
 
 const weather = (() => {
   const weather = ElementsList({
-    container: NewElement({ tag: 'div', classes: 'page contact d-flex flex-column' }),
+    container: NewElement({ tag: 'div' }),
     childs: [
-      NewElement({ tag: 'h1', classes: 'contact-title', html: 'Contact' }),
-      NewElement({ tag: 'p', classes: 'contact-text', html: 'Comments? Questions? Drop us a line!' }),
-      ElementsList({
-        container: NewElement({ tag: 'form' }),
-        childs: [
-          ElementsList({
-            container: NewElement({ tag: 'div', classes: 'form-group' }),
-            childs: [
-              NewElement({ tag: 'label', html: 'E-mail:', attributes: { for: 'email' } }),
-              NewElement({
-                tag: 'input',
-                classes: 'form-control',
-                attributes: { id: 'email', placeholder: 'Enter your e-mail here' },
-              }),
-            ],
-          }),
-          ElementsList({
-            container: NewElement({ tag: 'div', classes: 'form-group' }),
-            childs: [
-              NewElement({ tag: 'label', html: 'Message:', attributes: { for: 'message' } }),
-              NewElement({
-                tag: 'textarea',
-                classes: 'form-control',
-                attributes: { id: 'message', placeholder: 'Your message here', rows: '5' },
-              }),
-            ],
-          }),
-          NewElement({ tag: 'button', classes: 'btn btn-warning', html: 'Send' }),
-        ],
-      }),
+      NewElement(
+        {
+          tag: 'div',
+          classes: 'd-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom',
+          html: '<h1 class="h2">Weather App</h1>',
+        },
+      ),
+      ElementsList(
+        {
+          container: NewElement({ tag: 'div', classes: 'row justify-content-center' }),
+          childs: [
+            ElementsList(
+              {
+                container: NewElement({ tag: 'div', classes: 'col-12 col-lg-6' }),
+                childs: [
+                  FormWeather.create(),
+                ],
+              },
+            ),
+          ],
+        },
+      ),
     ],
   });
   return weather;

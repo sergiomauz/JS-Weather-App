@@ -3,18 +3,15 @@ const storage = (() => {
 
   const addCity = (city) => {
     const cities = JSON.parse(localStorage.getItem('cities') || '[]');
-    cities.push(city);
+    const indexCity = cities.indexOf(city);
+    if (indexCity >= 0) {
+      cities.splice(indexCity, 1);
+    }
+    cities.unshift(city);
     localStorage.setItem('cities', JSON.stringify(cities));
   };
 
-  const removeCity = (city) => {
-    const cities = this.getCities();
-    cities.
-      .localStorage.setItem('cities', JSON.stringify(cities));
-  };
-
-
-  return { addCity };
+  return { addCity, getCities };
 })();
 
 export default storage;

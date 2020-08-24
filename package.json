@@ -2,7 +2,7 @@
   "name": "weather-app",
   "version": "1.0.0",
   "description": "> One paragraph statement about the project.",
-  "private": true,
+  "main": "index.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack --mode development",
@@ -43,8 +43,5 @@
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  },
-  "dependencies": {
-    "bootstrap": "^4.5.0"
   }
 }

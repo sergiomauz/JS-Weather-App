@@ -1,3 +1,4 @@
+import Storage from '../classes/storage';
 import NewElement from '../rendering/newelement';
 import NestedElements from '../rendering/nestedelements';
 import ElementsList from '../rendering/elementslist';
@@ -23,7 +24,7 @@ const layout = (() => {
 
   const create = (page) => {
     navbarElement = Navbar.create();
-    sidebarElement = Sidebar.create();
+    sidebarElement = Sidebar.create(Storage.getCities());
     mainElement = Main.create();
 
     layoutElement = NewElement({ tag: 'div', attributes: { id: contentID } });

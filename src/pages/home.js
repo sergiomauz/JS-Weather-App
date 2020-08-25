@@ -1,9 +1,8 @@
 import NewElement from '../rendering/newelement';
 import ElementsList from '../rendering/elementslist';
-import NewMap from '../rendering/newmap';
 import FormWeather from '../components/form';
 
-const Home = (() => {
+const home = (() => {
   const home = ElementsList({
     container: NewElement({ tag: 'div' }),
     childs: [
@@ -14,35 +13,11 @@ const Home = (() => {
           html: '<h1 class="h2">Weather App</h1>',
         },
       ),
-      ElementsList(
-        {
-          container: NewElement({ tag: 'div', classes: 'row' }),
-          childs: [
-            ElementsList(
-              {
-                container: NewElement({ tag: 'div', classes: 'col-12 col-lg-6' }),
-                childs: [
-                  FormWeather.create(),
-                ],
-              },
-            ),
-            ElementsList(
-              {
-                container: NewElement({ tag: 'div', classes: 'col-12 col-lg-6 d-flex justify-content-center' }),
-                childs: [
-                  NewMap({
-                    latitude: '-18.01',
-                    longitude: '-70.25',
-                  }),
-                ],
-              },
-            ),
-          ],
-        },
-      ),
+      FormWeather.create(),
     ],
   });
+
   return home;
 })();
 
-export default Home;
+export default home;

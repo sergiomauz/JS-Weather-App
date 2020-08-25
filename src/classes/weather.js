@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 class Weather {
   constructor(params) {
     const { reqCity, reqUnits } = params;
@@ -26,10 +28,28 @@ class Weather {
     return this.units;
   }
 
-  requestAPI() {
-    fetch(this.urlAPI)
+  async request() {
+    this.info = await fetch(this.urlAPI)
       .then((response) => response.json())
-      .then((myJson) => myJson);
+      .then((jsonData) => {
+        let code = 0;
+        if (jsonData.cod === 200) {
+          code = 1;
+        } else if (jsonData.cod === 401) {
+          code = -1;
+        }
+
+        return {
+          result: code,
+          data: jsonData,
+        };
+      })
+      .catch((err) => ({
+        result: -1,
+        data: err.message,
+      }));
+
+    return this.info;
   }
 }
 

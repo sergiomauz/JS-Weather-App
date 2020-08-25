@@ -1,6 +1,8 @@
 const storage = (() => {
   const getCities = () => JSON.parse(localStorage.getItem('cities') || '[]');
 
+  const clearCities = () => localStorage.removeItem('cities');
+
   const addCity = (city) => {
     const cities = JSON.parse(localStorage.getItem('cities') || '[]');
     const indexCity = cities.indexOf(city);
@@ -11,7 +13,7 @@ const storage = (() => {
     localStorage.setItem('cities', JSON.stringify(cities));
   };
 
-  return { addCity, getCities };
+  return { addCity, getCities, clearCities };
 })();
 
 export default storage;

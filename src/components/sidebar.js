@@ -1,6 +1,7 @@
 import NewElement from '../rendering/newelement';
 import NestedElements from '../rendering/nestedelements';
 import ElementsList from '../rendering/elementslist';
+import Storage from '../classes/storage';
 
 const sidebar = (() => {
   let sidebarElement;
@@ -31,6 +32,15 @@ const sidebar = (() => {
   };
 
   const create = (cities) => {
+    const btnClear = NewElement({
+      tag: 'button', classes: 'btn btn-outline-danger', html: '<i class="fas fa-times"></i> Clear log',
+    });
+
+    btnClear.addEventListener('click', () => {
+      Storage.clearCities();
+      citiesNodes.innerHTML = '';
+    });
+
     loadCitiesNodes(cities);
 
     sidebarElement = NestedElements(
@@ -42,9 +52,7 @@ const sidebar = (() => {
             NewElement({
               tag: 'div', classes: 'd-flex justify-content-center py-3',
             }),
-            NewElement({
-              tag: 'button', classes: 'btn btn-danger', html: '<i class="fas fa-times"></i> Clear log',
-            }),
+            btnClear,
           ),
           citiesNodes,
         ],

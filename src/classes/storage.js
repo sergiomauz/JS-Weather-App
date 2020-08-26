@@ -3,13 +3,15 @@ const storage = (() => {
 
   const clearCities = () => localStorage.removeItem('cities');
 
-  const addCity = (city) => {
+  const addCity = (country, city) => {
     const cities = JSON.parse(localStorage.getItem('cities') || '[]');
+
     const indexCity = cities.indexOf(city);
+
     if (indexCity >= 0) {
       cities.splice(indexCity, 1);
     }
-    cities.unshift(city);
+    cities.unshift({ country: `${country}`, name: `${city}` });
     localStorage.setItem('cities', JSON.stringify(cities));
   };
 

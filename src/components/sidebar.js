@@ -2,6 +2,7 @@ import NewElement from '../rendering/newelement';
 import NestedElements from '../rendering/nestedelements';
 import ElementsList from '../rendering/elementslist';
 import Storage from '../classes/storage';
+import Icons from '../classes/icons';
 
 const sidebar = (() => {
   let sidebarElement;
@@ -10,12 +11,15 @@ const sidebar = (() => {
   const citiesNodes = NewElement({ tag: 'ul', classes: 'nav flex-column', attributes: { id: `${citiesnodesID}` } });
 
   const createCityNode = (city) => {
-    const liNode = NestedElements(
-      NewElement({ tag: 'li', classes: 'nav-item' }),
-      NewElement({
-        tag: 'a', classes: 'nav-link', html: `${city}`, attributes: { href: '#' },
-      }),
-    );
+    const liNode = ElementsList({
+      container: NewElement({ tag: 'li', classes: 'd-flex nav-item m-2' }),
+      childs: [
+        NewElement({ tag: 'img', attributes: { src: `${Icons.getFlagCountry(city.country)}` } }),
+        NewElement({
+          tag: 'a', classes: 'nav-link pl-2', html: `${city.name}`, attributes: { href: '#' },
+        }),
+      ],
+    });
 
     liNode.addEventListener('click', () => liNode.querySelector("a[class = 'nav-link']").innerHTML);
 

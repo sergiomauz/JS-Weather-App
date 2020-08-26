@@ -20,12 +20,11 @@ class Weather {
     return this.info;
   }
 
-  getCity() {
-    return this.city;
-  }
-
-  getUnits() {
-    return this.units;
+  getTemperature(temp) {
+    if (this.units === 'imperial') {
+      return `${parseFloat(temp).toFixed(2)} °F`;
+    }
+    return `${parseFloat(temp - 273.15).toFixed(2)} °C`;
   }
 
   async request() {
@@ -33,15 +32,36 @@ class Weather {
       .then((response) => response.json())
       .then((jsonData) => {
         let code = 0;
+        let data = {
+          message: jsonData.message,
+        };
+
         if (jsonData.cod === 200) {
           code = 1;
+          data = {
+            message: 'OK',
+            coordinates: {
+              latitude: jsonData.coord.lat,
+              longitude: jsonData.coord.lon,
+            },
+            country: jsonData.sys.country,
+            city: jsonData.name,
+            icon: jsonData.weather[0].icon,
+            description: `${jsonData.weather[0].main}, ${jsonData.weather[0].description}`,
+            main: {
+              temp: this.getTemperature(jsonData.main.temp),
+              feels_like: this.getTemperature(jsonData.main.feels_like),
+              temp_min: this.getTemperature(jsonData.main.temp_min),
+              temp_max: this.getTemperature(jsonData.main.temp_max),
+            },
+          };
         } else if (jsonData.cod === 401) {
           code = -1;
         }
 
         return {
           result: code,
-          data: jsonData,
+          data,
         };
       })
       .catch((err) => ({

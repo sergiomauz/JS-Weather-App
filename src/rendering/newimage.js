@@ -17,6 +17,7 @@ const NewImage = (...args) => {
   if (classes != null) {
     element.classList.add(...classes.split(' '));
   }
+
   return element;
 };
 

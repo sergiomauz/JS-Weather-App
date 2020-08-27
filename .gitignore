@@ -2,5 +2,5 @@
 # visit: https://github.com/microverseinc/linters-config/tree/master/javascript
 # run npm install
 node_modules/
-src/config/
+src/config/keys.js
 package-lock.json

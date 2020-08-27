@@ -1,16 +1,16 @@
-# Project Name
+# My Weather App
 
-> One paragraph statement about the project.
+> It is a Weather App: an example how to use external APIs, asynchronous functions and iframes.
 
-![screenshot](./app_screenshot.png)
+![screenshot](https://user-images.githubusercontent.com/36812672/91411468-fd4b2280-e80d-11ea-8c66-a79cc0f6fee1.png)
 
 Additional description about the project and its features.
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
+- HTML 5 / CSS 3,
+- Javascript,
+- Webpack
 
 ## Live Demo
 

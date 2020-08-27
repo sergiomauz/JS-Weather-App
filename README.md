@@ -2,7 +2,7 @@
 
 > It is a Weather App: an example how to use external APIs, asynchronous functions and iframes.
 
-![screenshot](https://user-images.githubusercontent.com/36812672/91411468-fd4b2280-e80d-11ea-8c66-a79cc0f6fee1.png)
+![screenshot](https://user-images.githubusercontent.com/36812672/91474286-a2dab200-e85f-11ea-8ea9-e081ba7da4a5.png)
 
 
 ## Built With
@@ -33,10 +33,11 @@ Check out the live demo [here](http://beta.szetapp.com/Weather-App/)
 - Clone this repository in your terminal using **git clone** command.
 - Enter the repo directory.
 - Run `npm install && npm run build` in your terminal.
-- Open
+- Open the `src/config/keys.js` file and edit the values for `getOpenWeatherKey` and `getUnsplashKey`. Use your own API Keys.
 
 
 ## Usage
+- Run `npm run pro` in your terminal.
 - Run `npm run server` in your terminal.
 - Open **http://localhost:8080** in your browser.
 
@@ -56,9 +57,11 @@ Contributions, issues and feature requests are welcome!
 
 Feel free to check the [issues page](../../issues/).
 
+
 ## Show your support
 
 Give a ⭐️ if you like this project!
+
 
 ## Acknowledgments
 

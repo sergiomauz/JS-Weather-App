@@ -3,4 +3,3 @@
 # run npm install
 node_modules/
 src/config/keys-pro.js
-package-lock.json

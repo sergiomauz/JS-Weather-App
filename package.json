@@ -1,14 +1,14 @@
 {
   "name": "weather-app",
   "version": "1.0.0",
-  "description": "> One paragraph statement about the project.",
+  "description": "> It is a weather app, using JavaScript for coding.",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack --mode development",
     "pro": "webpack -p",
     "watch": "webpack --w --mode development",
-    "server": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",

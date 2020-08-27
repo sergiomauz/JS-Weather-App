@@ -1,19 +1,20 @@
 import 'babel-polyfill';
+import Keys from '../config/keys';
 
 class Weather {
   constructor(params) {
     const { reqCity, reqUnits } = params;
-    const appID = '860baa5edd1cd9b42075446e14ae99c3';
+    const WEATHER_APP_ID = Keys.getOpenWeatherKey();
 
     this.city = reqCity;
 
-    if (reqUnits !== undefined) {
+    if (reqUnits) {
       this.units = reqUnits;
     } else {
       this.units = 'metrics';
     }
 
-    this.urlAPI = `http://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${appID}&units=${this.units}`;
+    this.urlAPI = `http://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${WEATHER_APP_ID}&units=${this.units}`;
   }
 
   getInfo() {
@@ -29,7 +30,7 @@ class Weather {
 
   async request() {
     this.info = await fetch(this.urlAPI)
-      .then((response) => response.json())
+      .then((responseData) => responseData.json())
       .then((jsonData) => {
         let code = 0;
         let data = {
@@ -47,8 +48,9 @@ class Weather {
             country: jsonData.sys.country,
             city: jsonData.name,
             icon: jsonData.weather[0].icon,
-            description: `${jsonData.weather[0].main}, ${jsonData.weather[0].description}`,
+            description: jsonData.weather[0].description,
             main: {
+              humidity: jsonData.main.humidity,
               temp: this.getTemperature(jsonData.main.temp),
               feels_like: this.getTemperature(jsonData.main.feels_like),
               temp_min: this.getTemperature(jsonData.main.temp_min),

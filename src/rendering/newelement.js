@@ -5,23 +5,23 @@ const newElement = (params) => {
 
   let element;
 
-  if (tag !== undefined) {
+  if (tag) {
     element = document.createElement(tag);
   }
 
-  if (classes !== undefined) {
+  if (classes) {
     element.classList.add(...classes.split(' '));
   }
 
-  if (html !== undefined) {
+  if (html) {
     element.innerHTML = html;
   }
 
-  if (click !== undefined) {
+  if (click) {
     element.addEventListener('click', () => { click(); });
   }
 
-  if (attributes !== undefined) {
+  if (attributes) {
     Object.keys(attributes).forEach((attribute) => {
       element.setAttribute(attribute, attributes[attribute]);
     });

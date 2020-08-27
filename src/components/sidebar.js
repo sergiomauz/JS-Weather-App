@@ -21,8 +21,6 @@ const sidebar = (() => {
       ],
     });
 
-    liNode.addEventListener('click', () => liNode.querySelector("a[class = 'nav-link']").innerHTML);
-
     return liNode;
   };
 

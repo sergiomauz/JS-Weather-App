@@ -3,19 +3,28 @@ const storage = (() => {
 
   const clearCities = () => localStorage.removeItem('cities');
 
-  const addCity = (country, city) => {
-    const cities = JSON.parse(localStorage.getItem('cities') || '[]');
-
-    const indexCity = cities.indexOf(city);
-
-    if (indexCity >= 0) {
-      cities.splice(indexCity, 1);
+  const getLastCity = () => {
+    const CITIES = getCities();
+    if (CITIES.length > 0) {
+      return `${CITIES[0].name}, ${CITIES[0].country}`;
     }
-    cities.unshift({ country: `${country}`, name: `${city}` });
-    localStorage.setItem('cities', JSON.stringify(cities));
+    return '';
   };
 
-  return { addCity, getCities, clearCities };
+  const addCity = (country, city) => {
+    const CITIES = JSON.parse(localStorage.getItem('cities') || '[]');
+    const INDEX_CITY = (CITIES.map((c) => (`${c.name}|${c.country}`))).indexOf(`${city}|${country}`);
+
+    if (INDEX_CITY >= 0) {
+      CITIES.splice(INDEX_CITY, 1);
+    }
+    CITIES.unshift({ country, name: city });
+    localStorage.setItem('cities', JSON.stringify(CITIES));
+  };
+
+  return {
+    addCity, getCities, clearCities, getLastCity,
+  };
 })();
 
 export default storage;

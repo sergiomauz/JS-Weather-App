@@ -3,16 +3,17 @@ import ElementsList from '../rendering/elementslist';
 import NewMap from '../rendering/newmap';
 import Storage from '../classes/storage';
 import Weather from '../classes/weather';
+import Unsplash from '../classes/unsplash';
 import Icons from '../classes/icons';
 import Sidebar from './sidebar';
 
 const form = (() => {
   let formElement;
 
-  const infoWeatherElementID = 'weather-info';
-  const mapWeatherElementID = 'weather-map';
-  const inputCityNameID = 'cityname';
-  const divErrorID = 'error-message';
+  const INFO_WEATHER_ELEMENT_ID = 'weather-info';
+  const MAP_WEATHER_ELEMENT_ID = 'weather-map';
+  const INPUT_CITY_NAME_ID = 'cityname';
+  const DIV_ERROR_ID = 'error-message';
 
   const buttonRequest = NewElement({
     tag: 'button', classes: 'btn btn-primary mt-2 mt-sm-0 ml-0 ml-sm-2', html: 'Request', attributes: { type: 'button' },
@@ -23,7 +24,13 @@ const form = (() => {
   });
 
   const showErrorRequest = (errorType) => {
-    const divError = formElement.querySelector(`div[id='${divErrorID}']`);
+    const divError = formElement.querySelector(`div[id='${DIV_ERROR_ID}']`);
+    const map = formElement.querySelector(`div[id='${MAP_WEATHER_ELEMENT_ID}']`);
+    const info = formElement.querySelector(`div[id='${INFO_WEATHER_ELEMENT_ID}']`);
+
+    document.body.style = '';
+    map.innerHTML = '';
+    info.innerHTML = '';
     divError.innerHTML = '';
     if (errorType === 0) {
       divError.className = 'alert alert-warning';
@@ -34,13 +41,20 @@ const form = (() => {
     }
   };
 
-  const showWeatherInfo = (weatherinfo, maprequired) => {
-    const map = formElement.querySelector(`div[id='${mapWeatherElementID}']`);
-    const info = formElement.querySelector(`div[id='${infoWeatherElementID}']`);
-    const errorMessage = formElement.querySelector(`div[id='${divErrorID}']`);
+  const showWeatherInfo = async (weatherinfo, maprequired) => {
+    const map = formElement.querySelector(`div[id='${MAP_WEATHER_ELEMENT_ID}']`);
+    const info = formElement.querySelector(`div[id='${INFO_WEATHER_ELEMENT_ID}']`);
+    const input = formElement.querySelector(`input[id='${INPUT_CITY_NAME_ID}']`);
+    const errorMessage = formElement.querySelector(`div[id='${DIV_ERROR_ID}']`);
+
     errorMessage.classList.add('d-none');
+    input.value = '';
 
     if (maprequired) {
+      const newWeatherImage = new Unsplash(weatherinfo.data.description);
+      const imageUrl = await newWeatherImage.getImageUrl();
+
+      document.body.style = `background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("${imageUrl}"); background-repeat:no-repeat; background-size:cover;`;
       map.innerHTML = '';
       map.appendChild(
         NewMap(
@@ -65,8 +79,8 @@ const form = (() => {
               {
                 container: NewElement({ tag: 'div', classes: 'form-control border-0', attributes: { id: 'spanCity' } }),
                 childs: [
-                  NewElement({ tag: 'img', attributes: { src: Icons.getFlagCountry(`${weatherinfo.data.country}`), style: 'margin-top:-5px;' } }),
-                  NewElement({ tag: 'span', classes: 'ml-2', html: `${weatherinfo.data.city}` }),
+                  NewElement({ tag: 'img', attributes: { src: Icons.getFlagCountry(weatherinfo.data.country), style: 'margin-top:-5px;' } }),
+                  NewElement({ tag: 'span', classes: 'ml-2', html: weatherinfo.data.city }),
                 ],
               },
             ),
@@ -95,6 +109,27 @@ const form = (() => {
         },
       ),
     );
+    info.appendChild(
+      ElementsList(
+        {
+          container: NewElement({ tag: 'div', classes: 'form-group' }),
+          childs: [
+            NewElement({
+              tag: 'label', classes: 'font-weight-bold', attributes: { for: 'spanHumidity' }, html: 'Humidity:',
+            }),
+            ElementsList(
+              {
+                container: NewElement({ tag: 'div', classes: 'form-control border-0', attributes: { id: 'spanHumidity' } }),
+                childs: [
+                  NewElement({ tag: 'span', classes: 'ml-2', html: `${weatherinfo.data.main.humidity}%` }),
+                ],
+              },
+            ),
+          ],
+        },
+      ),
+    );
+
     info.appendChild(
       ElementsList(
         {
@@ -140,11 +175,11 @@ const form = (() => {
 
   const create = () => {
     const inputRequest = NewElement({
-      tag: 'input', attributes: { type: 'text', id: `${inputCityNameID}`, autocomplete: 'off' }, classes: 'form-control ml-0 ml-sm-2',
+      tag: 'input', attributes: { type: 'text', id: `${INPUT_CITY_NAME_ID}`, autocomplete: 'off' }, classes: 'form-control ml-0 ml-sm-2',
     });
 
     const divError = NewElement({
-      tag: 'div', classes: 'd-none', attributes: { id: `${divErrorID}` },
+      tag: 'div', classes: 'd-none', attributes: { id: `${DIV_ERROR_ID}` },
     });
 
     buttonRequest.addEventListener('click', async () => {
@@ -193,8 +228,8 @@ const form = (() => {
             {
               container: NewElement({ tag: 'div', classes: 'row justify-content-center mt-3' }),
               childs: [
-                NewElement({ tag: 'div', classes: 'col-12 col-lg-6 mt-2 mt-lg-0', attributes: { id: `${mapWeatherElementID}` } }),
-                NewElement({ tag: 'div', classes: 'col-12 col-lg-6 mt-2 mt-lg-0', attributes: { id: `${infoWeatherElementID}` } }),
+                NewElement({ tag: 'div', classes: 'col-12 col-lg-6 mt-2 mt-lg-0 order-last order-lg-first', attributes: { id: `${MAP_WEATHER_ELEMENT_ID}` } }),
+                NewElement({ tag: 'div', classes: 'col-12 col-lg-6 mt-2 mt-lg-0', attributes: { id: `${INFO_WEATHER_ELEMENT_ID}` } }),
               ],
             },
           ),
@@ -202,14 +237,15 @@ const form = (() => {
       },
     );
 
-    const city = formElement.querySelector("input[class='form-control ml-0 ml-sm-2']");
     buttonChangeUnits.addEventListener('click', async () => {
+      const city = Storage.getLastCity();
+
       if (buttonChangeUnits.innerHTML.includes('Celsius')) {
         buttonChangeUnits.innerHTML = 'to Fahrenheit';
-        await requestWeather('metrics', city.value, false);
+        await requestWeather('metrics', city, false);
       } else {
         buttonChangeUnits.innerHTML = 'to Celsius';
-        await requestWeather('imperial', city.value, false);
+        await requestWeather('imperial', city, false);
       }
     });
 

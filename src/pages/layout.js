@@ -15,7 +15,7 @@ const layout = (() => {
   let mainElement;
 
   const loadPage = (page) => {
-    if (layoutElement !== undefined) {
+    if (layoutElement) {
       const main = layoutElement.querySelector(`div[id='${Main.getID()}']`);
       main.innerHTML = '';
       main.appendChild(page);
@@ -39,7 +39,7 @@ const layout = (() => {
       ),
     );
 
-    if (page === undefined) page = Home;
+    if (!page) page = Home;
     loadPage(page);
 
     return layoutElement;

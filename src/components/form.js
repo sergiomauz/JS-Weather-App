@@ -77,7 +77,7 @@ const form = (() => {
             }),
             ElementsList(
               {
-                container: NewElement({ tag: 'div', classes: 'form-control border-0', attributes: { id: 'spanCity' } }),
+                container: NewElement({ tag: 'div', attributes: { id: 'spanCity' } }),
                 childs: [
                   NewElement({ tag: 'img', attributes: { src: Icons.getFlagCountry(weatherinfo.data.country), style: 'margin-top:-5px;' } }),
                   NewElement({ tag: 'span', classes: 'ml-2', html: weatherinfo.data.city }),
@@ -98,7 +98,7 @@ const form = (() => {
             }),
             ElementsList(
               {
-                container: NewElement({ tag: 'div', classes: 'form-control border-0', attributes: { id: 'spanWeather' } }),
+                container: NewElement({ tag: 'div', attributes: { id: 'spanWeather' } }),
                 childs: [
                   NewElement({ tag: 'img', attributes: { src: Icons.getWeather(`${weatherinfo.data.icon}`), style: 'margin-top:-8px;margin-left:-5px;width:40px;height:40px;' } }),
                   NewElement({ tag: 'span', classes: 'ml-2', html: `${weatherinfo.data.description}` }),
@@ -119,7 +119,7 @@ const form = (() => {
             }),
             ElementsList(
               {
-                container: NewElement({ tag: 'div', classes: 'form-control border-0', attributes: { id: 'spanHumidity' } }),
+                container: NewElement({ tag: 'div', attributes: { id: 'spanHumidity' } }),
                 childs: [
                   NewElement({ tag: 'span', classes: 'ml-2', html: `${weatherinfo.data.main.humidity}%` }),
                 ],
